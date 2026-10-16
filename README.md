@@ -21,8 +21,8 @@
 │  커밋 → /nextstep:create-pr  push + PR 생성 링크                  │   │
 │        │                                                          │   │
 │        ▼  (리뷰 → merge 후)                                       │   │
-│  /nextstep:advance  upstream 동기화 +                             │   │
-│                     다음 step 브랜치 생성 ────────────────────────┘   │
+│  /nextstep:sync-upstream  upstream 동기화 +                       │   │
+│                           다음 step 브랜치 생성(선택) ────────────┘   │
 │                                                                       │
 └───────────────────────────────────────────────────────────────────────┘
 ```
@@ -32,7 +32,7 @@
 | **/nextstep:start-mission** | 새 미션을 처음 시작할 때 | fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치를 fork에 올리기, 최초 작업 브랜치(step1) 생성 |
 | **/nextstep:check-requirements** | 구현 중·커밋 전 수시로 | 붙여넣은 미션 요구사항을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백 |
 | **/nextstep:create-pr** | 단계 구현을 마쳤을 때 | push 후 base(본인 아이디 브랜치)/head와 제목(인자, 없으면 `step1 - 아이디`)이 미리 채워진 PR 생성 링크 제공. 본문·PR 생성은 본인이 |
-| **/nextstep:advance** | PR이 merge된 뒤 | 끝난 브랜치 정리, upstream fetch·rebase 동기화, 다음 step 브랜치 생성. 충돌 해결 절차 포함 |
+| **/nextstep:sync-upstream** | 리뷰가 끝나 PR이 merge된 뒤 (미션을 다 끝낸 뒤에도) | merge 여부 확인 후 끝난 브랜치 정리, upstream fetch·rebase 동기화. 다음 step 브랜치 생성은 선택(merge 전이면 마지막 step 브랜치 기준). 충돌 해결 절차 포함 |
 
 ## 설치
 
@@ -67,7 +67,7 @@ Claude Code 대화에서 `/nextstep:스킬이름`으로 직접 호출합니다.
 /nextstep:start-mission 미션 저장소 URL  ← 예: /nextstep:start-mission https://github.com/next-step/java-racingcar
 /nextstep:check-requirements 미션 조건   ← 요구사항 텍스트를 붙여넣거나 캡처 이미지를 첨부
 /nextstep:create-pr PR 제목              ← 단계 구현을 마치고 커밋한 뒤 (제목 생략 시 step1 - 아이디)
-/nextstep:advance                        ← PR이 merge된 뒤
+/nextstep:sync-upstream                  ← 리뷰가 끝나 PR이 merge된 뒤
 ```
 
 인자를 빼먹어도 괜찮습니다 — 스킬이 필요한 정보(저장소 URL, 미션 조건)를 물어봅니다. \

@@ -8,7 +8,7 @@
     {
       "name": "nextstep",
       "source": "./",
-      "description": "미션 시작, 요구사항 체크, PR 생성, 다음 단계 진행등 지원"
+      "description": "미션 시작, 요구사항 체크, PR 생성, upstream 동기화 등 지원"
     }
   ]
 }
