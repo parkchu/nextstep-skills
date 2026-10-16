@@ -1,6 +1,6 @@
-# nextstep-claude-skills
+# nextstep-skills
 
-[넥스트스텝(NextStep)](https://edu.nextstep.camp) 미션의 Git/GitHub 절차를 도와주는 [Claude Code](https://claude.com/claude-code) 스킬 모음입니다.
+[넥스트스텝(NextStep)](https://edu.nextstep.camp) 미션의 Git/GitHub 절차를 도와주는 AI 코딩 에이전트용 스킬 모음입니다. [Claude Code](https://claude.com/claude-code) 플러그인으로 설치하며, 같은 SKILL.md 형식을 읽는 Codex·pi에서도 설치할 수 있습니다.
 
 넥스트스텝 미션은 fork → 아이디 브랜치 기준 작업 → PR → merge 후 upstream 동기화라는, 처음엔 꽤 헷갈리는 Git 절차를 요구합니다. 이 스킬들은 그 절차에서 **본인 아이디·저장소 이름 같은 빈칸을 Claude가 직접 읽어 채우고**, 위험한 명령은 확인을 받으며 진행해 줍니다.
 
@@ -39,22 +39,22 @@
 Claude Code 플러그인으로 설치합니다. Claude Code 대화창에서 실행하세요.
 
 ```
-/plugin marketplace add parkchu/nextstep-claude-skills
-/plugin install nextstep@nextstep-claude-skills
+/plugin marketplace add parkchu/nextstep-skills
+/plugin install nextstep@nextstep-skills
 ```
 
 사용자 전역(user scope)에 설치되므로 어느 미션 저장소에서든 쓸 수 있습니다.
 
-**업데이트** — 새 버전은 자동으로 들어오지 않습니다. 아래 명령으로 받거나, `/plugin` → Marketplaces → `nextstep-claude-skills` → **Enable auto-update**로 자동 업데이트를 켜세요.
+**업데이트** — 새 버전은 자동으로 들어오지 않습니다. 아래 명령으로 받거나, `/plugin` → Marketplaces → `nextstep-skills` → **Enable auto-update**로 자동 업데이트를 켜세요.
 
 ```
-/plugin marketplace update nextstep-claude-skills
+/plugin marketplace update nextstep-skills
 ```
 
 **삭제**
 
 ```
-/plugin uninstall nextstep@nextstep-claude-skills
+/plugin uninstall nextstep@nextstep-skills
 ```
 
 > 예전에 `~/.claude/skills/`에 `nextstep-*` 폴더를 복사해 설치했다면, 중복되지 않도록 그 폴더들은 지워주세요.
