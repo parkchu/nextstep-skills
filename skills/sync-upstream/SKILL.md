@@ -77,10 +77,11 @@ merge된 최신 코드를 본인 브랜치에 맞춘다. 히스토리를 바꾸�
 git rebase upstream/{본인_아이디}
 ```
 - 충돌이 나면 아래 "충돌 해결"로 간다.
-- rebase 후 로컬 아이디 브랜치가 origin(본인 fork)보다 앞서게 된다. fork의 아이디 브랜치도 최신으로 맞춰두려면(선택) push한다:
+- rebase가 끝나면(충돌 해결로 맞춘 경우도) 로컬 아이디 브랜치가 origin(본인 fork)보다 앞서게 된다. **건너뛰지 말고 항상** fork의 아이디 브랜치에도 반영한다. 원격에 반영되는 동작이라 실행 전 한 줄로 알리고 동의를 받는다.
 ```bash
 git push origin {본인_아이디}
 ```
+- push가 non-fast-forward로 거부되면 `--force`로 밀지 않는다. fork의 아이디 브랜치에만 있는 커밋을 보여 주고 어떻게 할지 묻는다.
 
 ## 7단계 — 다음 단계 브랜치 생성 (선택)
 
@@ -108,6 +109,7 @@ base는 4단계 판정에 따라 다르다.
 ```bash
 git checkout {본인_아이디}
 git reset --hard upstream/{본인_아이디}    # ⚠️ 로컬 변경 사라짐
+git push origin {본인_아이디}              # 6단계처럼 fork에도 반영 (확인 후)
 git checkout {기능_브랜치}
 git merge {본인_아이디}
 ```
@@ -115,7 +117,8 @@ git merge {본인_아이디}
 
 ## 하지 말 것
 - placeholder(`{본인_아이디}` 등)를 그대로 두고 안내하지 않는다. `git remote -v`로 실제 값을 채운다.
-- `rebase`·`reset --hard`·`branch -D`를 사용자 확인 없이 실행하지 않는다.
+- `rebase`·`reset --hard`·`branch -D`·`push`를 사용자 확인 없이 실행하지 않는다.
+- 동기화하고 나서 `git push origin {본인_아이디}`를 빠뜨리지 않는다.
 - 아직 merge 전이라고 판정했으면 `branch -D`·`rebase`·`reset --hard`를 실행하지 않는다.
 - 미커밋 변경이 남아 있는데 rebase/reset을 강행하지 않는다.
 - 다음 단계 브랜치를 묻지 않고 만들지 않는다.
