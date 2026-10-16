@@ -1,6 +1,6 @@
 {
   "name": "nextstep-skills",
-  "description": "넥스트스텝(NextStep) 미션용 Claude Code 플러그인",
+  "description": "넥스트스텝(NextStep) 미션용 스킬들 모음",
   "owner": {
     "name": "parkchu"
   },
@@ -8,7 +8,7 @@
     {
       "name": "nextstep",
       "source": "./",
-      "description": "넥스트스텝 미션 시작(start)·조건 체크(check)·PR(pr)·다음 단계(advance)"
+      "description": "미션 시작, 요구사항 체크, PR 생성, 다음 단계 진행등 지원"
     }
   ]
 }

@@ -1,9 +1,9 @@
 ---
-name: pr
-description: 넥스트스텝(NextStep) 미션의 작업 브랜치를 push하고, 저장소·브랜치 주소를 확인한 뒤 PR 생성 링크(브라우저)를 제공한다. 제목·본문은 채우지 않고 브랜치 연결까지만 한다. PR 자체는 사용자가 브라우저에서 만든다. 사용자가 "미션 끝냈으니 PR 보내줘", "리뷰 요청 보내줘", "PR 올려줘", "/nextstep:pr" 등으로 요청할 때 사용한다.
+name: create-pr
+description: 넥스트스텝(NextStep) 미션의 작업 브랜치를 push하고, 저장소·브랜치 주소를 확인한 뒤 PR 생성 링크(브라우저)를 제공한다. 제목·본문은 채우지 않고 브랜치 연결까지만 한다. PR 자체는 사용자가 브라우저에서 만든다. 사용자가 "미션 끝냈으니 PR 보내줘", "리뷰 요청 보내줘", "PR 올려줘", "/nextstep:create-pr" 등으로 요청할 때 사용한다.
 ---
 
-# /nextstep:pr — 넥스트스텝 PR 보내기
+# /nextstep:create-pr — 넥스트스텝 PR 생성
 
 넥스트스텝 미션 작업을 마친 뒤 **push → PR 생성 링크 제공**까지 돕는다.
 PR 생성 자체는 사용자가 브라우저에서 한다(이 스킬은 base/head가 연결된 링크만 준비해 준다). 제목·본문은 채우지 않고 사용자가 GitHub 화면에서 직접 작성한다.
@@ -23,7 +23,6 @@ git log origin/{작업브랜치}..HEAD --oneline   # 아직 push 안 된 커밋 
 여기서 추출할 값:
 - **본인_아이디**: `origin` URL `github.com/{아이디}/{repo}`에서. → PR의 **base 브랜치 이름**이자 head 소유자.
 - **저장소(repo)**: origin/upstream의 repo 이름.
-- **next-step owner**: `upstream` URL에서. upstream이 없으면 관례상 `next-step`으로 보되 사용자에게 확인한다.
 
 ## 2단계 — 커밋 상태 확인
 
@@ -44,7 +43,7 @@ push 후, base/head 값을 **표로 정리해 사용자에게 보여주고 OK를
 
 | 항목 | 값 |
 |------|----|
-| base 저장소 | `{next-step owner}/{repo}` |
+| base 저장소 | `next-step/{repo}` |
 | base 브랜치 | `{본인_아이디}` |
 | compare(head) | `{본인_아이디}:{작업브랜치}` |
 
@@ -52,7 +51,7 @@ push 후, base/head 값을 **표로 정리해 사용자에게 보여주고 OK를
 
 링크 형식:
 ```
-https://github.com/{next-step owner}/{repo}/compare/{본인_아이디}...{본인_아이디}:{작업브랜치}?expand=1
+https://github.com/next-step/{repo}/compare/{본인_아이디}...{본인_아이디}:{작업브랜치}?expand=1
 ```
 예) `https://github.com/next-step/java-racingcar/compare/javajigi...javajigi:step1?expand=1`
 

@@ -7,31 +7,31 @@
 ## 스킬 4개와 미션 흐름
 
 ```
-┌─ 미션 시작 ─────────────────────────────────────────────┐
-│                                                          │
-│  /nextstep:start   fork · clone · 최초 브랜치(step1) 생성  │
-│        │                                                 │
-│        ▼                                                 │
-│     구현 (직접)  ◀──────────────────────────┐             │
-│        │                                   │             │
-│        ▼                                   │             │
-│  /nextstep:check  미션 조건 충족 여부 체크리스트│             │
-│        │                                   │             │
-│        ▼                                   │             │
-│   커밋 → /nextstep:pr  push + PR 생성 링크   │             │
-│        │                                   │             │
-│        ▼  (리뷰 → merge 후)                 │             │
-│  /nextstep:advance  upstream 동기화 +       │             │
-│                     다음 step 브랜치 생성 ────┘             │
-│                                                          │
-└──────────────────────────────────────────────────────────┘
+┌─ 미션 시작 ───────────────────────────────────────────────────────────┐
+│                                                                       │
+│  /nextstep:start-mission  fork · clone · 최초 브랜치(step1) 생성      │
+│        │                                                              │
+│        ▼                                                              │
+│     구현 (직접)  ◀────────────────────────────────────────────────┐   │
+│        │                                                          │   │
+│        ▼                                                          │   │
+│  /nextstep:check-requirements  미션 조건 충족 여부 체크리스트     │   │
+│        │                                                          │   │
+│        ▼                                                          │   │
+│  커밋 → /nextstep:create-pr  push + PR 생성 링크                  │   │
+│        │                                                          │   │
+│        ▼  (리뷰 → merge 후)                                       │   │
+│  /nextstep:advance  upstream 동기화 +                             │   │
+│                     다음 step 브랜치 생성 ────────────────────────┘   │
+│                                                                       │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
 | 스킬 | 언제 | 하는 일 |
 |------|------|---------|
-| **/nextstep:start** | 새 미션을 처음 시작할 때 | fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치 확인, 최초 작업 브랜치(step1) 생성 |
-| **/nextstep:check** | 구현 중·커밋 전 수시로 | 붙여넣은 미션 요구사항을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백 |
-| **/nextstep:pr** | 단계 구현을 마쳤을 때 | push 후 base(본인 아이디 브랜치)/head가 미리 연결된 PR 생성 링크 제공. 제목·본문·PR 생성은 본인이 |
+| **/nextstep:start-mission** | 새 미션을 처음 시작할 때 | fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치를 fork에 올리기, 최초 작업 브랜치(step1) 생성 |
+| **/nextstep:check-requirements** | 구현 중·커밋 전 수시로 | 붙여넣은 미션 요구사항을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백 |
+| **/nextstep:create-pr** | 단계 구현을 마쳤을 때 | push 후 base(본인 아이디 브랜치)/head가 미리 연결된 PR 생성 링크 제공. 제목·본문·PR 생성은 본인이 |
 | **/nextstep:advance** | PR이 merge된 뒤 | 끝난 브랜치 정리, upstream fetch·rebase 동기화, 다음 step 브랜치 생성. 충돌 해결 절차 포함 |
 
 ## 설치
@@ -64,16 +64,16 @@ Claude Code 플러그인으로 설치합니다. Claude Code 대화창에서 실�
 Claude Code 대화에서 `/nextstep:스킬이름`으로 직접 호출합니다.
 
 ```
-/nextstep:start 미션 저장소 URL   ← 예: /nextstep:start https://github.com/next-step/java-racingcar
-/nextstep:check 미션 조건         ← 요구사항 텍스트를 붙여넣거나 캡처 이미지를 첨부
-/nextstep:pr                     ← 단계 구현을 마치고 커밋한 뒤
-/nextstep:advance                ← PR이 merge된 뒤
+/nextstep:start-mission 미션 저장소 URL  ← 예: /nextstep:start-mission https://github.com/next-step/java-racingcar
+/nextstep:check-requirements 미션 조건   ← 요구사항 텍스트를 붙여넣거나 캡처 이미지를 첨부
+/nextstep:create-pr                      ← 단계 구현을 마치고 커밋한 뒤
+/nextstep:advance                        ← PR이 merge된 뒤
 ```
 
 인자를 빼먹어도 괜찮습니다 — 스킬이 필요한 정보(저장소 URL, 미션 조건)를 물어봅니다. \
 자연어로 요청해도 해당 스킬이 자동으로 잡힙니다. (예: "미션 시작하려는데 저장소 세팅해줘")
 
-**/nextstep:start 사용 시 알아둘 것**
+**/nextstep:start-mission 사용 시 알아둘 것**
 
 - **미션 저장소 주소가 필요합니다.** 넥스트스텝 미션 페이지에 있는 GitHub 저장소 URL(예: `https://github.com/next-step/java-racingcar`)을 함께 알려주세요. 안 알려주면 스킬이 어느 미션인지 물어봅니다.
 - **clone 위치는 Claude Code를 실행한 현재 디렉토리 바로 아래**(`./저장소이름`)입니다. 위치를 따로 묻지 않으니, 미션 저장소들을 모아둘 디렉토리에서 실행하세요.

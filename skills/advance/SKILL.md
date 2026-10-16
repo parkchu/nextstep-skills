@@ -30,7 +30,6 @@ git status                  # 미커밋 변경 여부
 git remote add upstream https://github.com/next-step/{repo}.git
 git remote -v
 ```
-> next-step owner가 다른 경우(조직명이 다름) 사용자에게 base 저장소 URL을 확인한다.
 
 ## 3단계 — 끝난 브랜치 정리 (확인 후)
 
