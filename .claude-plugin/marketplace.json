@@ -1,0 +1,14 @@
+{
+  "name": "nextstep-claude-skills",
+  "description": "넥스트스텝(NextStep) 미션용 Claude Code 플러그인",
+  "owner": {
+    "name": "parkchu"
+  },
+  "plugins": [
+    {
+      "name": "nextstep",
+      "source": "./",
+      "description": "넥스트스텝 미션 시작(start)·조건 체크(check)·PR(pr)·다음 단계(advance)"
+    }
+  ]
+}

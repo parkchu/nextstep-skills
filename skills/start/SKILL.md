@@ -1,12 +1,12 @@
 ---
-name: nextstep-start
-description: 넥스트스텝(NextStep) 미션을 처음 시작할 때, 미션 저장소를 fork·clone하고 최초 작업 브랜치(step1 등)까지 만들어 준다. gh CLI로 fork+clone을 한 번에 처리하고, gh가 없거나 인증이 안 돼 있으면 브라우저 Fork 안내로 폴백한다. 이미 fork/clone돼 있으면 재사용하고 이어서 진행한다(재실행 안전). 사용자가 "미션 시작하려는데 저장소 세팅해줘", "새 미션 시작할래", "fork부터 해줘", "nextstep-start" 등으로 요청할 때 사용한다.
+name: start
+description: 넥스트스텝(NextStep) 미션을 처음 시작할 때, 미션 저장소를 fork·clone하고 최초 작업 브랜치(step1 등)까지 만들어 준다. gh CLI로 fork+clone을 한 번에 처리하고, gh가 없거나 인증이 안 돼 있으면 브라우저 Fork 안내로 폴백한다. 이미 fork/clone돼 있으면 재사용하고 이어서 진행한다(재실행 안전). 사용자가 "미션 시작하려는데 저장소 세팅해줘", "새 미션 시작할래", "fork부터 해줘", "/nextstep:start" 등으로 요청할 때 사용한다.
 ---
 
-# nextstep-start — 넥스트스텝 미션 최초 시작
+# /nextstep:start — 넥스트스텝 미션 최초 시작
 
 새 미션을 처음 시작할 때 **fork → clone → 최초 작업 브랜치 생성**까지 세팅한다.
-이후 흐름은 다른 스킬이 잇는다: 구현 → [nextstep-check](조건 확인) → 커밋 → [nextstep-pr](리뷰 요청) → merge 후 [nextstep-advance](다음 단계).
+이후 흐름은 다른 스킬이 잇는다: 구현 → [/nextstep:check](조건 확인) → 커밋 → [/nextstep:pr](리뷰 요청) → merge 후 [/nextstep:advance](다음 단계).
 
 ## 0단계 — 미션 시작 확인 (한 줄 안내)
 
@@ -47,7 +47,7 @@ cd {repo}
 
 ## 3단계 — remote 확인·보장
 
-어느 경로로 왔든(gh/폴백/기존 clone 재사용), [nextstep-advance]가 바로 쓸 수 있도록 remote 두 개를 보장한다:
+어느 경로로 왔든(gh/폴백/기존 clone 재사용), [/nextstep:advance]가 바로 쓸 수 있도록 remote 두 개를 보장한다:
 ```bash
 git remote -v     # origin(본인 fork) + upstream(next-step 원본) 둘 다 있는지
 ```
@@ -79,7 +79,7 @@ git checkout -b step1 origin/{본인_아이디}
 
 - 작업 위치(`{현재 위치}/{repo}`)와 브랜치(`step1`)를 한 줄로 알려준다.
 - IDE(IntelliJ 등)에서 이 디렉토리를 **Import/Open** 해서 구현을 시작하면 된다고 안내한다.
-- 이후 흐름 소개: 구현 → [nextstep-check]로 미션 조건 확인 → 커밋 → [nextstep-pr]로 리뷰 요청.
+- 이후 흐름 소개: 구현 → [/nextstep:check]로 미션 조건 확인 → 커밋 → [/nextstep:pr]로 리뷰 요청.
 
 ## 하지 말 것
 

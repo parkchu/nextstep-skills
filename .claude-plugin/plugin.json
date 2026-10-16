@@ -1,0 +1,8 @@
+{
+  "name": "nextstep",
+  "description": "넥스트스텝(NextStep) 미션의 fork·브랜치·PR·upstream 동기화 절차를 도와주는 스킬 모음",
+  "author": {
+    "name": "parkchu"
+  },
+  "repository": "https://github.com/parkchu/nextstep-claude-skills"
+}
