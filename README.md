@@ -31,7 +31,7 @@
 |------|------|---------|
 | **/nextstep:start-mission** | 새 미션을 처음 시작할 때 | fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치를 fork에 올리기, 최초 작업 브랜치(step1) 생성 |
 | **/nextstep:check-requirements** | 구현 중·커밋 전 수시로 | 붙여넣은 미션 요구사항을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백 |
-| **/nextstep:create-pr** | 단계 구현을 마쳤을 때 | push 후 base(본인 아이디 브랜치)/head가 미리 연결된 PR 생성 링크 제공. 제목·본문·PR 생성은 본인이 |
+| **/nextstep:create-pr** | 단계 구현을 마쳤을 때 | push 후 base(본인 아이디 브랜치)/head와 제목(인자, 없으면 `step1 - 아이디`)이 미리 채워진 PR 생성 링크 제공. 본문·PR 생성은 본인이 |
 | **/nextstep:advance** | PR이 merge된 뒤 | 끝난 브랜치 정리, upstream fetch·rebase 동기화, 다음 step 브랜치 생성. 충돌 해결 절차 포함 |
 
 ## 설치
@@ -66,7 +66,7 @@ Claude Code 대화에서 `/nextstep:스킬이름`으로 직접 호출합니다.
 ```
 /nextstep:start-mission 미션 저장소 URL  ← 예: /nextstep:start-mission https://github.com/next-step/java-racingcar
 /nextstep:check-requirements 미션 조건   ← 요구사항 텍스트를 붙여넣거나 캡처 이미지를 첨부
-/nextstep:create-pr                      ← 단계 구현을 마치고 커밋한 뒤
+/nextstep:create-pr PR 제목              ← 단계 구현을 마치고 커밋한 뒤 (제목 생략 시 step1 - 아이디)
 /nextstep:advance                        ← PR이 merge된 뒤
 ```
 
@@ -89,4 +89,4 @@ Claude Code 대화에서 `/nextstep:스킬이름`으로 직접 호출합니다.
 - **빈칸은 Claude가 채운다**: 본인 아이디, 저장소 이름, base 브랜치를 외울 필요 없이 `git remote -v` 등에서 자동 추출합니다.
 - **위험한 명령은 확인 후 실행**: `push`, `rebase`, `reset --hard`, `branch -D`는 실행 전에 무엇을 하는지 알리고 동의를 받습니다.
 - **재실행 안전**: 이미 fork/clone돼 있으면 지우거나 덮어쓰지 않고 재사용해 이어서 진행합니다.
-- **각 스킬은 자기 책임까지만**: 코드 구현·수정, 커밋 메시지, PR 제목·본문은 학습을 위해 본인 몫으로 남깁니다.
+- **각 스킬은 자기 책임까지만**: 코드 구현·수정, 커밋 메시지, PR 본문은 학습을 위해 본인 몫으로 남깁니다. (PR 제목은 기본값만 채워 주고, 원하면 인자나 GitHub 화면에서 바꿉니다)
