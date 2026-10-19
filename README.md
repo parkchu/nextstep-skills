@@ -6,6 +6,7 @@
 
 ## 설치
 
+> [!NOTE]
 > Claude Code, Codex, pi 모두 **macOS의 CLI 환경에서만 테스트**했습니다. 다른 OS나 데스크톱 앱·IDE 확장 등 다른 환경에서는 동작이 다를 수 있습니다.
 
 > [!TIP]
