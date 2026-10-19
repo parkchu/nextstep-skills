@@ -102,3 +102,20 @@ pi remove git:github.com/parkchu/nextstep-skills
 
 - **미션 저장소 주소가 필요합니다.** 넥스트스텝 미션 페이지에 있는 GitHub 저장소 URL(예: `https://github.com/next-step/java-racingcar`)을 함께 알려주세요. 안 알려주면 스킬이 어느 미션인지 물어봅니다.
 - **clone 위치는 에이전트를 실행한 현재 디렉토리 바로 아래**(`./저장소이름`)입니다. 위치를 따로 묻지 않으니, 미션 저장소들을 모아둘 디렉토리에서 실행하세요.
+
+## 미션 흐름
+
+```mermaid
+flowchart TD
+    A[넥스트스텝 웹에서 '미션 시작' 클릭] --> B([start-mission])
+    B --> C[구현]
+    C --> D([check-requirements])
+    D --> E[커밋]
+    E --> F([create-pr])
+    F --> G[넥스트스텝 웹에서 '리뷰 요청' 클릭]
+    G --> H[리뷰 → merge]
+    H --> I([sync-upstream])
+    I -->|다음 step| C
+```
+
+둥근 칸은 스킬, 네모 칸은 스킬 없이 진행하는 단계입니다.
