@@ -7,11 +7,6 @@ description: 넥스트스텝(NextStep) 미션을 처음 시작할 때, 미션 �
 
 새 미션을 처음 시작할 때 **fork → clone → 최초 작업 브랜치 생성**까지 세팅한다.
 
-## 0단계 — 미션 시작 확인 (한 줄 안내)
-
-넥스트스텝 사이트(edu.nextstep.camp)에서 해당 미션의 **`미션 시작` 버튼을 눌렀는지** 확인한다. *(웹에서만 가능)*
-이걸 눌러야 next-step 저장소에 **본인 아이디 브랜치**가 생기고 **리뷰어가 배정**된다. 안 눌렀으면 먼저 누르고 오도록 안내한다.
-
 ## 1단계 — 미션 저장소 확인
 
 호출할 때 미션 저장소 URL이나 이름(예: `https://github.com/next-step/java-racingcar`, `java-racingcar`)이 주어졌으면 거기서 repo 이름을 쓴다.
@@ -71,7 +66,7 @@ git fetch upstream {본인_아이디}
 git push origin refs/remotes/upstream/{본인_아이디}:refs/heads/{본인_아이디}
 ```
 - push는 원격에 반영되는 동작이니 **무엇을 어디로 올리는지 한 줄로 알리고 동의를 받은 뒤** 실행한다.
-- `git fetch upstream {본인_아이디}`부터 실패하면 next-step에 브랜치 자체가 없는 것이다. 미션 시작 버튼을 안 누른 경우이니 0단계로 안내한다.
+- `git fetch upstream {본인_아이디}`부터 실패하면 next-step에 브랜치 자체가 없는 것이다. 미션 시작 버튼을 안 누른 경우이니, 넥스트스텝 사이트(edu.nextstep.camp)에서 해당 미션의 **`미션 시작` 버튼**을 누르고 이 스킬을 다시 실행하도록 안내한다. 이 버튼을 눌러야 next-step 저장소에 본인 아이디 브랜치가 생기고 리뷰어가 배정된다. 다시 실행하면 이미 받은 fork·clone은 재사용된다.
 
 ## 4단계 — 최초 작업 브랜치 생성
 
