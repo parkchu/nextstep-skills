@@ -8,6 +8,14 @@
 
 > Claude Code, Codex, pi 모두 **CLI 환경에서만 테스트**했습니다. 데스크톱 앱·IDE 확장 등 다른 환경에서는 동작이 다를 수 있습니다.
 
+> [!TIP]
+> [GitHub CLI(`gh`)](https://cli.github.com)를 설치하고 로그인해 두면 더 편합니다. `start-mission`이 fork와 아이디 확인을 자동으로 처리하고, `sync-upstream`이 PR merge 여부를 직접 확인합니다. 없어도 브라우저 안내와 질문으로 진행됩니다.
+>
+> ```
+> brew install gh   # macOS (다른 OS는 위 링크 참고)
+> gh auth login
+> ```
+
 <details>
 <summary><b>Claude Code</b></summary>
 <br>
