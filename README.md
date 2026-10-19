@@ -89,8 +89,8 @@ pi remove git:github.com/parkchu/nextstep-skills
 
 <table>
   <tr>
-    <th width="240">스킬</th>
-    <th width="170">언제</th>
+    <th width="280">스킬</th>
+    <th width="210">언제</th>
     <th>하는 일</th>
   </tr>
   <tr>
