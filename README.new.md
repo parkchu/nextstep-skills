@@ -79,3 +79,26 @@ pi remove git:github.com/parkchu/nextstep-skills
 ```
 
 </details>
+
+## 사용법
+
+> **Codex 사용 시 주의** — 권한을 **Full Access**로 설정하세요. 기본 샌드박스에서는 네트워크 접근과 작업 디렉토리 밖 쓰기가 막혀 `gh`·`git push`·clone 같은 단계가 실패합니다. Codex 대화창에서 `/permissions` → **Full Access**를 고르거나, `codex --sandbox danger-full-access`로 실행하세요.
+
+스킬 이름 뒤에 인자를 붙여 부릅니다. 스킬 이름 앞에 붙는 접두사만 에이전트마다 다릅니다 — Claude Code는 `/nextstep:`, Codex는 `$nextstep:`, pi는 `/skill:`입니다.
+
+| 스킬 | 언제 | 하는 일 |
+|------|------|---------|
+| **start-mission** `미션 저장소 URL` | 새 미션을 처음 시작할 때 | fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치를 fork에 올리기, 최초 작업 브랜치(step1) 생성 |
+| **check-requirements** `미션 요구사항` | 구현 중·커밋 전 수시로 | 붙여넣은 미션 요구사항(텍스트나 캡처 이미지)을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백 |
+| **create-pr** `PR 제목` | 단계 구현을 마치고 커밋한 뒤 | push 후 base(본인 아이디 브랜치)/head와 제목(인자, 없으면 `step1 - 아이디`)이 미리 채워진 PR 생성 링크 제공. 본문·PR 생성은 본인이 |
+| **sync-upstream** | 리뷰가 끝나 PR이 merge된 뒤 (미션을 다 끝낸 뒤에도) | merge 여부 확인 후 끝난 브랜치 정리, upstream fetch·rebase 동기화. 다음 step 브랜치 생성은 선택(merge 전이면 마지막 step 브랜치 기준). 충돌 해결 절차 포함 |
+
+예: `/nextstep:start-mission https://github.com/next-step/java-racingcar` (Claude Code)
+
+인자를 빼먹어도 괜찮습니다 — 스킬이 필요한 정보(저장소 URL, 미션 조건)를 물어봅니다. \
+자연어로 요청해도 해당 스킬이 자동으로 잡힙니다. (예: "미션 시작하려는데 저장소 세팅해줘")
+
+**start-mission 사용 시 알아둘 것**
+
+- **미션 저장소 주소가 필요합니다.** 넥스트스텝 미션 페이지에 있는 GitHub 저장소 URL(예: `https://github.com/next-step/java-racingcar`)을 함께 알려주세요. 안 알려주면 스킬이 어느 미션인지 물어봅니다.
+- **clone 위치는 에이전트를 실행한 현재 디렉토리 바로 아래**(`./저장소이름`)입니다. 위치를 따로 묻지 않으니, 미션 저장소들을 모아둘 디렉토리에서 실행하세요.
