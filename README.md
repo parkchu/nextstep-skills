@@ -10,6 +10,7 @@
 
 <details>
 <summary><b>Claude Code</b></summary>
+<br>
 
 터미널에서 실행하세요.
 
@@ -34,6 +35,7 @@ claude plugin marketplace remove nextstep-skills
 
 <details>
 <summary><b>Codex</b></summary>
+<br>
 
 터미널에서 실행하세요.
 
@@ -59,6 +61,7 @@ codex plugin marketplace remove nextstep-skills
 
 <details>
 <summary><b>pi</b></summary>
+<br>
 
 터미널에서 실행하세요.
 
