@@ -9,7 +9,7 @@
 > Claude Code, Codex, pi 모두 **CLI 환경에서만 테스트**했습니다. 데스크톱 앱·IDE 확장 등 다른 환경에서는 동작이 다를 수 있습니다.
 
 <details>
-<summary><b>Claude Code</b></summary>
+<summary><h3>Claude Code</h3></summary>
 
 터미널에서 실행하세요.
 
@@ -33,7 +33,7 @@ claude plugin marketplace remove nextstep-skills
 </details>
 
 <details>
-<summary><b>Codex</b></summary>
+<summary><h3>Codex</h3></summary>
 
 터미널에서 실행하세요.
 
@@ -58,7 +58,7 @@ codex plugin marketplace remove nextstep-skills
 </details>
 
 <details>
-<summary><b>pi</b></summary>
+<summary><h3>pi</h3></summary>
 
 터미널에서 실행하세요.
 
@@ -82,18 +82,47 @@ pi remove git:github.com/parkchu/nextstep-skills
 
 ## 사용법
 
+> [!WARNING]
 > **Codex 사용 시 주의** — 권한을 **Full Access**로 설정하세요. 기본 샌드박스에서는 네트워크 접근과 작업 디렉토리 밖 쓰기가 막혀 `gh`·`git push`·clone 같은 단계가 실패합니다. Codex 대화창에서 `/permissions` → **Full Access**를 고르거나, `codex --sandbox danger-full-access`로 실행하세요.
 
 스킬 이름 뒤에 인자를 붙여 부릅니다. 스킬 이름 앞에 붙는 접두사만 에이전트마다 다릅니다 — Claude Code는 `/nextstep:`, Codex는 `$nextstep:`, pi는 `/skill:`입니다.
 
-| 스킬 | 언제 | 하는 일 |
-|------|------|---------|
-| **start-mission** `미션 저장소 URL` | 새 미션을 처음 시작할 때 | fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치를 fork에 올리기, 최초 작업 브랜치(step1) 생성 |
-| **check-requirements** `미션 요구사항` | 구현 중·커밋 전 수시로 | 붙여넣은 미션 요구사항(텍스트나 캡처 이미지)을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백 |
-| **create-pr** `PR 제목` | 단계 구현을 마치고 커밋한 뒤 | push 후 base(본인 아이디 브랜치)/head와 제목(인자, 없으면 `step1 - 아이디`)이 미리 채워진 PR 생성 링크 제공. 본문·PR 생성은 본인이 |
-| **sync-upstream** | 리뷰가 끝나 PR이 merge된 뒤 (미션을 다 끝낸 뒤에도) | merge 여부 확인 후 끝난 브랜치 정리, upstream fetch·rebase 동기화. 다음 step 브랜치 생성은 선택(merge 전이면 마지막 step 브랜치 기준). 충돌 해결 절차 포함 |
+<table>
+  <tr>
+    <th width="240">스킬</th>
+    <th width="170">언제</th>
+    <th>하는 일</th>
+  </tr>
+  <tr>
+    <td><b>start-mission</b> <code>미션 저장소 URL</code></td>
+    <td>새 미션을 처음 시작할 때</td>
+    <td>fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치를 fork에 올리기, 최초 작업 브랜치(step1) 생성</td>
+  </tr>
+  <tr>
+    <td><b>check-requirements</b> <code>미션 요구사항</code></td>
+    <td>구현 중·커밋 전 수시로</td>
+    <td>붙여넣은 미션 요구사항(텍스트나 캡처 이미지)을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백</td>
+  </tr>
+  <tr>
+    <td><b>create-pr</b> <code>PR 제목</code> (선택)</td>
+    <td>단계 구현을 마치고 커밋한 뒤</td>
+    <td>push 후 base(본인 아이디 브랜치)/head와 제목(인자, 없으면 <code>step1 - 아이디</code>)이 미리 채워진 PR 생성 링크 제공. 본문·PR 생성은 본인이</td>
+  </tr>
+  <tr>
+    <td><b>sync-upstream</b></td>
+    <td>리뷰가 끝나 PR이 merge된 뒤 (미션을 다 끝낸 뒤에도)</td>
+    <td>merge 여부 확인 후 끝난 브랜치 정리, upstream fetch·rebase 동기화. 다음 step 브랜치 생성은 선택(merge 전이면 마지막 step 브랜치 기준). 충돌 해결 절차 포함</td>
+  </tr>
+</table>
 
-예: `/nextstep:start-mission https://github.com/next-step/java-racingcar` (Claude Code)
+예시 (Claude Code)
+
+```
+/nextstep:start-mission https://github.com/next-step/java-racingcar
+/nextstep:check-requirements (미션 요구사항 텍스트를 붙여넣거나 캡처 이미지를 첨부)
+/nextstep:create-pr 1단계 - 자동차 경주  ← 제목은 선택 (생략 시 step1 - 아이디)
+/nextstep:sync-upstream
+```
 
 인자를 빼먹어도 괜찮습니다 — 스킬이 필요한 정보(저장소 URL, 미션 조건)를 물어봅니다. \
 자연어로 요청해도 해당 스킬이 자동으로 잡힙니다. (예: "미션 시작하려는데 저장소 세팅해줘")
