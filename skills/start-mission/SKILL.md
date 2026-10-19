@@ -1,6 +1,6 @@
 ---
 name: start-mission
-description: 넥스트스텝(NextStep) 미션을 처음 시작할 때, 미션 저장소를 fork·clone하고 최초 작업 브랜치(step1 등)까지 만들어 준다. gh CLI로 fork+clone을 한 번에 처리하고, gh가 없거나 인증이 안 돼 있으면 브라우저 Fork 안내로 폴백한다. 이미 fork/clone돼 있으면 재사용하고 이어서 진행한다(재실행 안전). 사용자가 "미션 시작하려는데 저장소 세팅해줘", "새 미션 시작할래", "fork부터 해줘", "/nextstep:start-mission" 등으로 요청할 때 사용한다.
+description: 넥스트스텝(NextStep) 미션을 처음 시작할 때, 미션 저장소를 fork·clone하고 최초 작업 브랜치(step1 등)까지 만들어 준다. gh CLI로 fork하고 clone까지 이어서 처리하며, gh가 없거나 인증이 안 돼 있으면 브라우저 Fork 안내로 폴백한다. 이미 fork/clone돼 있으면 재사용하고 이어서 진행한다(재실행 안전). 사용자가 "미션 시작하려는데 저장소 세팅해줘", "새 미션 시작할래", "fork부터 해줘", "/nextstep:start-mission" 등으로 요청할 때 사용한다.
 ---
 
 # /nextstep:start-mission — 넥스트스텝 미션 최초 시작
@@ -18,14 +18,16 @@ clone은 **이 스킬을 호출한 현재 디렉토리 바로 아래**(`./{repo}
 
 먼저 재실행 안전 확인: `./{repo}` 디렉토리가 **이미 있으면 새로 받지 않고** 그 안으로 이동해 3단계로 간다.
 
-없으면 gh 사용 가능 여부를 확인하고 fork+clone을 한 번에 실행한다:
+없으면 gh 사용 가능 여부를 확인하고 fork와 clone을 **나눠서** 실행한다:
 ```bash
-gh auth status                                                # gh 설치·인증 확인
-gh repo fork next-step/{repo} --clone --default-branch-only   # fork + clone + remote 세팅까지 한 번에
+gh auth status                                                      # gh 설치·인증 확인
+gh repo fork next-step/{repo} --clone=false --default-branch-only   # fork만 만든다
+gh api user -q .login                                               # 본인 아이디 확인
+git clone https://github.com/{본인_아이디}/{repo}.git
 cd {repo}
 ```
-- `gh repo fork --clone`은 origin(본인 fork)과 upstream(원본)을 **자동으로 같이** 잡아준다.
 - `--default-branch-only`로 **기본 브랜치만** 복사한다. 원본에는 수강생마다 아이디 브랜치가 있어서 전부 복사하면 다른 사람 브랜치 수백 개가 fork에 딸려 온다. 본인 아이디 브랜치는 3단계에서 따로 올린다.
+- `--clone`을 쓰지 않는다. `gh repo fork --clone`은 clone 뒤 upstream을 추가하면서 브랜치 지정 없이 `git fetch upstream`을 돌려, fork는 기본 브랜치만이어도 **로컬 `upstream/*`에 다른 사람 브랜치가 전부** 들어온다. upstream은 3단계에서 직접 추가하고, 본인 아이디 브랜치만 지정해서 받는다.
 - **fork가 이미 있으면** gh가 기존 fork를 그대로 재사용한다(에러 아님). 그대로 진행한다.
 
 ### gh를 못 쓸 때 (미설치·미인증) — 브라우저 폴백
