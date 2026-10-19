@@ -9,7 +9,7 @@
 > Claude Code, Codex, pi 모두 **CLI 환경에서만 테스트**했습니다. 데스크톱 앱·IDE 확장 등 다른 환경에서는 동작이 다를 수 있습니다.
 
 <details>
-<summary><h3>Claude Code</h3></summary>
+<summary><b>Claude Code</b></summary>
 
 터미널에서 실행하세요.
 
@@ -33,7 +33,7 @@ claude plugin marketplace remove nextstep-skills
 </details>
 
 <details>
-<summary><h3>Codex</h3></summary>
+<summary><b>Codex</b></summary>
 
 터미널에서 실행하세요.
 
@@ -58,7 +58,7 @@ codex plugin marketplace remove nextstep-skills
 </details>
 
 <details>
-<summary><h3>pi</h3></summary>
+<summary><b>pi</b></summary>
 
 터미널에서 실행하세요.
 
