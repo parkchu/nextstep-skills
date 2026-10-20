@@ -73,9 +73,11 @@ git push origin refs/remotes/upstream/{본인_아이디}:refs/heads/{본인_아�
 ## 4단계 — 최초 작업 브랜치 생성
 
 관례적 기본값 **`step1`을 제안하고 확인**받은 뒤 생성한다(미션에 따라 다르면 사용자가 이름을 정정).
-시작점은 반드시 **본인 아이디 브랜치**다(PR base가 이 브랜치라서, 기본 브랜치에서 갈라지면 diff가 오염될 수 있다):
+시작점은 반드시 **본인 아이디 브랜치**다(PR base가 이 브랜치라서, 기본 브랜치에서 갈라지면 diff가 오염될 수 있다).
+로컬 아이디 브랜치도 함께 만든다. 나중에 [/nextstep:sync-upstream]이 이 로컬 브랜치로 merge 여부를 판정하고 rebase한다(이미 있으면 첫 줄은 건너뛴다):
 ```bash
-git checkout -b step1 origin/{본인_아이디}
+git branch {본인_아이디} origin/{본인_아이디}
+git checkout -b step1 {본인_아이디}
 ```
 
 ## 5단계 — 마무리 안내
