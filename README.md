@@ -111,11 +111,6 @@ pi remove git:github.com/parkchu/nextstep-skills
     <td>fork+clone(gh CLI, 없으면 브라우저 폴백), upstream remote 세팅, 아이디 브랜치를 fork에 올리기, 최초 작업 브랜치(step1) 생성</td>
   </tr>
   <tr>
-    <td><b>check-requirements</b> <code>미션 요구사항</code></td>
-    <td>구현 중·커밋 전 수시로</td>
-    <td>붙여넣은 미션 요구사항(텍스트나 캡처 이미지)을 diff와 대조해 조건별 ✅충족/❌미충족/⏸판단보류 체크리스트로 피드백</td>
-  </tr>
-  <tr>
     <td><b>create-pr</b> <code>PR 제목</code> (선택)</td>
     <td>단계 구현을 마치고 커밋한 뒤</td>
     <td>push 후 base(본인 아이디 브랜치)/head와 제목(인자, 없으면 <code>step1 - 아이디</code>)이 미리 채워진 PR 생성 링크 제공. 본문·PR 생성은 본인이</td>
@@ -131,12 +126,11 @@ pi remove git:github.com/parkchu/nextstep-skills
 
 ```
 /nextstep:start-mission https://github.com/next-step/java-racingcar
-/nextstep:check-requirements (미션 요구사항 텍스트를 붙여넣거나 캡처 이미지를 첨부)
 /nextstep:create-pr 1단계 - 자동차 경주  ← 제목은 선택 (생략 시 step1 - 아이디)
 /nextstep:sync-upstream
 ```
 
-인자를 빼먹어도 괜찮습니다 — 스킬이 필요한 정보(저장소 URL, 미션 조건)를 물어봅니다. \
+인자를 빼먹어도 괜찮습니다 — 스킬이 필요한 정보(저장소 URL 등)를 물어봅니다. \
 자연어로 요청해도 해당 스킬이 자동으로 잡힙니다. (예: "미션 시작하려는데 저장소 세팅해줘")
 
 **start-mission 사용 시 알아둘 것**
@@ -150,8 +144,7 @@ pi remove git:github.com/parkchu/nextstep-skills
 flowchart TD
     A[넥스트스텝 웹에서 '미션 시작' 클릭] --> B([start-mission])
     B --> C[구현]
-    C --> D([check-requirements])
-    D --> E[커밋]
+    C --> E[커밋]
     E --> F([create-pr])
     F --> G[넥스트스텝 웹에서 '리뷰 요청' 클릭]
     G --> H[리뷰 → merge]

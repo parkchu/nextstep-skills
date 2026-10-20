@@ -84,7 +84,7 @@ git checkout -b step1 {본인_아이디}
 
 - 작업 위치(`{현재 위치}/{repo}`)와 브랜치(`step1`)를 한 줄로 알려준다.
 - IDE(IntelliJ 등)에서 이 디렉토리를 **Import/Open** 해서 구현을 시작하면 된다고 안내한다.
-- 이후 흐름 소개: 구현 → [/nextstep:check-requirements]로 미션 조건 확인 → 커밋 → [/nextstep:create-pr]로 리뷰 요청.
+- 이후 흐름 소개: 구현 → 커밋 → [/nextstep:create-pr]로 리뷰 요청.
 
 ## 하지 말 것
 
